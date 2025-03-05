@@ -1,139 +1,126 @@
-### Checklist Atualizado do Projeto "CodeAPI - Sales System’s" (04/03/2025)
-
-#### 1. Estrutura Básica e Configuração
-- [x] **Configuração do Ambiente**  
-  - Status: Concluído  
-  - Descrição: Ambiente Python com `venv`, dependências em `requirements.txt` (FastAPI, MongoDB, Redis, SendGrid, etc.), `.env` configurado.
-
-- [x] **Estrutura do FastAPI**  
-  - Status: Concluído  
-  - Descrição: `main.py` com rotas básicas (`/`, `/user`, `/admin`, `/products`), templates Jinja2, integrações MongoDB e Redis.
-
-- [x] **Conexão com MongoDB**  
-  - Status: Concluído  
-  - Descrição: Conexão em `dependencies.py`, modelos (`users.py`, `products.py`, `orders.py`, `tickets.py`) criados e funcionais.
-
-- [x] **Conexão com Redis**  
-  - Status: Concluído  
-  - Descrição: Sessões gerenciadas em `config.py` com `redis_client`, TTL de 24 horas.
-
-#### 2. Autenticação e Usuários
-- [x] **Login OAuth2 com Discord**  
-  - Status: Concluído  
-  - Descrição: Implementado em `routes/auth.py`, redireciona para `/user`, `/admin` ou `return_url` (ex.: `/user/buy/{product_id}`).
-
-- [x] **Registro de Usuários no Banco**  
-  - Status: Concluído  
-  - Descrição: Usuários criados em `users` após login OAuth2 em `routes/auth.py`.
-
-- [x] **Sessões com Redis**  
-  - Status: Concluído  
-  - Descrição: Sessões armazenadas no Redis, validadas por `get_current_user`.
-
-#### 3. Produtos e Compras
-- [x] **Página Pública de Produtos (`/products`)**  
-  - Status: Concluído  
-  - Descrição: Rota em `main.py`, template `products.html`, acessível sem login, botão "Comprar" redireciona para login se necessário.
-
-- [x] **Gestão Básica de Produtos (Admin)**  
-  - Status: Concluído  
-  - Descrição: Adição de produtos em `routes/admin.py` com formulário em `admin.html`.
-
-- [ ] **Gestão Avançada de Produtos (Admin)**  
-  - Status: Pendente  
-  - Descrição: Edição e exclusão de produtos ainda não implementadas.
-
-- [x] **Fluxo de Compra**  
-  - Status: Concluído  
-  - Descrição: Compra em `/user/buy/{product_id}`, redirecionamento para login se deslogado, QR Code e chave Pix gerados.
-
-- [x] **Gerador de Pix**  
-  - Status: Concluído  
-  - Descrição: `pix_generator.py` gera payloads válidos com `order_id` como `txid`.
-
-- [x] **Atualização de Estoque**  
-  - Status: Concluído  
-  - Descrição: Produtos "individual" têm estoque atualizado para "sold" em `routes/admin.py`.
-
-#### 4. Pedidos e Validação
-- [x] **Registro de Pedidos**  
-  - Status: Concluído  
-  - Descrição: Pedidos salvos em `orders` com `product_name` em `routes/user.py`.
-
-- [x] **Dashboard do Usuário**  
-  - Status: Concluído  
-  - Descrição: Exibe pedidos com `product_name` e status em `user.html`.
-
-- [x] **Dashboard do Admin (Pedidos)**  
-  - Status: Concluído  
-  - Descrição: Lista pedidos pendentes e em verificação em `admin_orders.html`, com ações de confirmar/negar.
-
-- [x] **Validação Manual de Pedidos**  
-  - Status: Concluído  
-  - Descrição: Confirmação e negação em `routes/admin.py`, atualiza status e estoque.
-
-#### 5. Interface e Experiência do Usuário
-- [x] **Templates HTML com TailwindCSS**  
-  - Status: Concluído  
-  - Descrição: Todos os templates (`index.html`, `user.html`, `admin.html`, `products.html`, `buy.html`, `admin_orders.html`, `admin_tickets.html`) usam TailwindCSS via CDN.
-
-- [x] **Timer na Página de Compra**  
-  - Status: Concluído  
-  - Descrição: Timer de 10 minutos em `buy.html` com JavaScript.
-
-- [x] **Favicon**  
-  - Status: Concluído  
-  - Descrição: Adicionado em todos os templates.
-
-#### 6. Notificações e Suporte
-- [x] **Notificações por E-mail (SendGrid) - Usuário**  
-  - Status: Concluído  
-  - Descrição: E-mails de confirmação e negação enviados ao usuário em `utils/email.py`, chamados em `routes/admin.py`.
-
-- [x] **Notificações por E-mail (SendGrid) - Admin (Pedidos)**  
-  - Status: Concluído  
-  - Descrição: E-mail ao admin quando pedido muda para "em_verificacao" em `utils/email.py`, chamado em `routes/user.py`.
-
-- [ ] **Notificações por E-mail (SendGrid) - Tickets**  
-  - Status: Pendente  
-  - Descrição: Faltam e-mails específicos para novos tickets e respostas (ex.: `send_new_ticket_email`, `send_ticket_response_email`).
-
-- [x] **Sistema de Suporte (Tickets) - Básico**  
-  - Status: Concluído  
-  - Descrição: Criação de tickets em `routes/user.py`, listagem e resposta em `routes/admin.py`, com modelo `tickets.py` e templates `user.html` e `admin_tickets.html`.
-
-- [ ] **Sistema de Suporte (Tickets) - Completo**  
-  - Status: Pendente  
-  - Descrição: Faltam notificações por e-mail para tickets e exibição de respostas no dashboard do usuário.
-
-#### 7. Monitoramento e Escalabilidade
-- [ ] **Sentry para Monitoramento**  
-  - Status: Pendente  
-  - Descrição: Configurado no `.env`, mas não integrado ao código.
-
-- [ ] **Cache Avançado com Redis**  
-  - Status: Pendente  
-  - Descrição: Redis usado apenas para sessões; cache de produtos ou pedidos ainda não implementado.
-
-- [ ] **Validação Automática do Pix**  
-  - Status: Pendente (Opcional)  
-  - Descrição: Não implementada, validação permanece manual.
+Entendido, Lucas! Como não tenho acesso direto ao seu repositório no GitHub (`https://github.com/LucasDesignerF/Checklist-projeto`), vou assumir que você quer criar um novo checklist com base no que já fizemos até aqui no projeto e listar o que ainda falta fazer. Vou resumir o progresso com base no nosso trabalho até agora e criar um checklist para organizar as próximas etapas. Caso você tenha algo específico no seu repositório que queira incluir, me avise ou cole o conteúdo relevante aqui para que eu possa incorporá-lo.
 
 ---
 
-### Resumo
-**Concluído (20/26):**
-- Estrutura básica, autenticação OAuth2, registro de usuários, página pública de produtos, gestão básica de produtos, fluxo de compra com Pix, atualização de estoque, registro de pedidos, dashboards (usuário e admin), validação manual, templates com TailwindCSS, timer, favicon, notificações por e-mail para pedidos (usuário e admin), sistema básico de tickets.
+### Resumo do Progresso Até Agora
+Com base no que desenvolvemos até aqui, temos uma aplicação funcional com várias páginas HTML, rotas e funcionalidades implementadas. Aqui está um resumo do que já foi feito:
 
-**Pendente (6/26):**
-- Gestão avançada de produtos (editar/excluir), notificações completas para tickets, exibição de respostas de tickets no dashboard do usuário, integração com Sentry, cache avançado com Redis, validação automática do Pix (opcional).
+1. **Estrutura Geral do Projeto:**
+   - Configuração do FastAPI com Jinja2 para templates.
+   - Sistema de autenticação via Discord OAuth2 (`/discord/login` e `/logout`).
+   - Sistema de rotas públicas e protegidas (`routes/public.py`, `routes/user.py`, `routes/admin.py`).
+   - Banco de dados MongoDB para produtos, pedidos e tickets.
+   - Sistema de cookies para autenticação (`discord_id`).
+
+2. **Templates HTML:**
+   - **`base.html`:** Estrutura base com header, footer, e menu hamburguer funcional.
+   - **`index.html`:** Página inicial com seção Hero ajustada e seção "Por que Escolher a CodeAPI?" com espaçamentos otimizados.
+   - **`products.html`:** Listagem de produtos com opção de compra.
+   - **`buy.html`:** Página de finalização de compra com QR Code PIX, timer de 10 minutos, e botão "Copiar".
+   - **`user.html`:** Dashboard do usuário com pedidos e formulário para abrir tickets.
+   - **`admin.html`:** Dashboard do admin com links para gerenciar produtos, pedidos e tickets, e estatísticas básicas.
+   - **`admin_products.html`:** Gerenciamento de produtos com listagem (incluindo imagem), adição, edição e exclusão.
+   - **`admin_edit_product.html`:** Formulário para editar produtos.
+   - **`admin_orders.html`:** Gerenciamento de pedidos pendentes e em verificação.
+   - **`admin_tickets.html`:** Gerenciamento de tickets abertos com opção de resposta.
+
+3. **Funcionalidades Implementadas:**
+   - **Usuários:** Autenticação via Discord, logout, e dashboard com pedidos e abertura de tickets.
+   - **Produtos:** Listagem pública, compra de produtos, gerenciamento (adicionar, editar, excluir) no admin.
+   - **Pedidos:** Criação de pedidos, pagamento via PIX, confirmação/negação pelo admin, envio de e-mails (confirmado/negado).
+   - **Tickets:** Abertura de tickets pelo usuário, resposta pelo admin.
+
+4. **Estilo e Design:**
+   - Tema consistente com gradiente escuro (`from-black via-gray-900 to-purple-900`), `backdrop-blur`, e paleta roxa (`purple-400`) e verde (`green-500`).
+   - Espaçamentos ajustados no `index.html` para um layout mais equilibrado.
+   - Tabelas e formulários estilizados (`bg-white/10`, `rounded-xl`) para manter consistência.
 
 ---
 
-### Comparação com o Último Checklist
-Desde o último checklist (17/23 concluídos):
-- **Novos Itens Concluídos:**
-  - Notificações por e-mail para admin (pedidos em verificação).
-  - Sistema básico de suporte (tickets) com criação, listagem e resposta.
-- **Ajustes:**
-  - Dividi o item "Sistema de Suporte (Tickets)" em "Básico" (concluído) e "Completo" (pendente) para refletir o progresso parcial.
+### Novo Checklist: O que Já Fizemos e o que Falta
+Com base no progresso, aqui está o novo checklist para verificar o que já foi feito e identificar o que ainda falta fazer.
+
+#### Checklist: Progresso Atual
+- [x] **Estrutura do Projeto**
+  - [x] Configuração do FastAPI com templates Jinja2.
+  - [x] Banco de dados MongoDB configurado para produtos, pedidos e tickets.
+  - [x] Sistema de autenticação via Discord OAuth2.
+  - [x] Rotas públicas, de usuário e de admin separadas.
+
+- [x] **Páginas HTML**
+  - [x] `base.html`: Estrutura base com header, footer, e menu hamburguer.
+  - [x] `index.html`: Página inicial com Hero Section e Features ajustadas.
+  - [x] `products.html`: Listagem de produtos com opção de compra.
+  - [x] `buy.html`: Finalização de compra com PIX, timer, e botão "Copiar".
+  - [x] `user.html`: Dashboard do usuário com pedidos e formulário para abrir tickets.
+  - [x] `admin.html`: Dashboard do admin com links de navegação e estatísticas.
+  - [x] `admin_products.html`: Gerenciamento de produtos com listagem (incluindo imagem), adição, edição e exclusão.
+  - [x] `admin_edit_product.html`: Formulário para editar produtos.
+  - [x] `admin_orders.html`: Gerenciamento de pedidos com opções de confirmar/negar.
+  - [x] `admin_tickets.html`: Gerenciamento de tickets com formulário para resposta.
+
+- [x] **Funcionalidades**
+  - [x] Autenticação e logout de usuários via Discord.
+  - [x] Listagem pública de produtos.
+  - [x] Compra de produtos com geração de QR Code PIX.
+  - [x] Gerenciamento de produtos pelo admin (adicionar, editar, excluir).
+  - [x] Gerenciamento de pedidos pelo admin (confirmar/negar, envio de e-mails).
+  - [x] Abertura e resposta de tickets (usuário e admin).
+  - [x] Timer de 10 minutos no pagamento PIX (`buy.html`).
+
+- [x] **Estilo**
+  - [x] Tema consistente com gradiente escuro e `backdrop-blur`.
+  - [x] Paleta de cores com roxo e verde.
+  - [x] Espaçamentos ajustados no `index.html` (Hero e Features).
+  - [x] Tabelas e formulários estilizados em todas as páginas.
+
+#### Checklist: O que Falta Fazer
+- [ ] **Funcionalidades Pendentes**
+  - [ ] Notificações por e-mail para resposta de tickets: Atualmente, tickets são respondidos, mas falta enviar e-mails ao usuário quando o admin responde.
+  - [ ] Gestão avançada de estoque: Para produtos individuais, implementar controle mais detalhado (ex.: exibir quais credenciais estão disponíveis/vendidas).
+  - [ ] Filtros e busca: Adicionar filtros na listagem de produtos (`products.html`) e pedidos (`admin_orders.html`).
+  - [ ] Paginação: Implementar paginação para listagens longas (ex.: produtos, pedidos, tickets).
+  - [ ] Dashboard do Usuário Avançado: Mostrar histórico de tickets abertos no `user.html`.
+
+- [ ] **Páginas HTML Pendentes**
+  - [ ] `admin_edit_product.html` (Ajustes): O formulário atual é funcional, mas pode ser melhorado com validações no frontend (ex.: JavaScript para validar campos).
+  - [ ] `error.html`: Criar uma página de erro genérica para lidar com 404, 403, etc.
+
+- [ ] **Melhorias de Estilo**
+  - [ ] Modais: Usar modais para edição de produtos (`admin_products.html`) em vez de redirecionar para uma página separada.
+  - [ ] Responsividade: Revisar responsividade em todas as páginas, especialmente tabelas em dispositivos móveis.
+  - [ ] Animações: Adicionar mais animações sutis com Tailwind (ex.: `hover:animate-bounce` para botões).
+
+- [ ] **Segurança e Performance**
+  - [ ] Validações: Adicionar validações mais robustas nos formulários (ex.: impedir preços negativos no `admin_products.html`).
+  - [ ] Rate Limiting: Implementar limite de requisições para rotas críticas (ex.: `/discord/login`).
+  - [ ] Cache: Usar cache para listagens frequentes (ex.: `/products`) com Redis.
+
+- [ ] **Testes**
+  - [ ] Testes Unitários: Escrever testes para rotas críticas (ex.: `/admin/add-product`, `/user/buy/{product_id}`).
+  - [ ] Testes de Integração: Testar fluxo completo de compra (do `products.html` ao `buy.html`).
+
+---
+
+### Testando as Alterações
+1. **Atualize `admin_products.html`:**
+   - Substitua `templates/admin_products.html` pelo código ajustado com a coluna de imagem.
+2. **Atualize `routes/admin.py`:**
+   - Substitua `routes/admin.py` pelo código ajustado para garantir que `/admin/products` e outras rotas estejam funcionando.
+3. **Reinicie o Servidor:**
+   ```bash
+   python main.py
+   ```
+4. **Acesse e Teste:**
+   - **`/admin/products`:** Verifique a nova coluna "Imagem" na tabela e confirme que as imagens estão sendo exibidas corretamente.
+   - **Adição/Edição/Exclusão:** Teste todas as ações (adicionar, editar, excluir) para garantir que funcionam como esperado.
+   - **Outras Páginas:** Confirme que `/admin/orders`, `/admin/tickets`, e outras páginas continuam funcionando.
+
+---
+
+### Confirmação
+- **Imagem na Tabela:** A coluna "Imagem" foi adicionada à tabela do `admin_products.html`, exibindo `product.image_url` como um thumbnail (`w-16 h-16`).
+- **Rotas Atualizadas:** O `routes/admin.py` foi ajustado para incluir todas as funcionalidades de gerenciamento de produtos.
+- **Estilo Mantido:** O tema continua consistente (`bg-white/10`, `backdrop-blur-lg`, roxo e verde).
+
+Está tudo correto agora? Quer que eu implemente alguma das funcionalidades pendentes do checklist (ex.: notificações de tickets, filtros na listagem de produtos) ou ajustar algo mais? Me avise como prosseguimos!
