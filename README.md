@@ -1,64 +1,64 @@
-### Checklist do Projeto "CodeAPI - Sales System’s"
+### Checklist Atualizado do Projeto "CodeAPI - Sales System’s" (04/03/2025)
 
 #### 1. Estrutura Básica e Configuração
 - [x] **Configuração do Ambiente**  
   - Status: Concluído  
-  - Descrição: Ambiente Python configurado com `venv`, dependências instaladas via `requirements.txt` (FastAPI, MongoDB, Redis, SendGrid, etc.), e `.env` funcional.
+  - Descrição: Ambiente Python com `venv`, dependências em `requirements.txt` (FastAPI, MongoDB, Redis, SendGrid, etc.), `.env` configurado.
 
 - [x] **Estrutura do FastAPI**  
   - Status: Concluído  
-  - Descrição: `main.py` inicializado com rotas básicas (`/`, `/user`, `/admin`, `/products`), templates Jinja2 e integrações (MongoDB, Redis).
+  - Descrição: `main.py` com rotas básicas (`/`, `/user`, `/admin`, `/products`), templates Jinja2, integrações MongoDB e Redis.
 
 - [x] **Conexão com MongoDB**  
   - Status: Concluído  
-  - Descrição: Conexão estabelecida em `dependencies.py`, modelos (`users.py`, `products.py`, `orders.py`) criados e funcionando.
+  - Descrição: Conexão em `dependencies.py`, modelos (`users.py`, `products.py`, `orders.py`, `tickets.py`) criados e funcionais.
 
 - [x] **Conexão com Redis**  
   - Status: Concluído  
-  - Descrição: Sessões de usuário gerenciadas em `config.py` com `redis_client`, usadas no login OAuth2.
+  - Descrição: Sessões gerenciadas em `config.py` com `redis_client`, TTL de 24 horas.
 
 #### 2. Autenticação e Usuários
 - [x] **Login OAuth2 com Discord**  
   - Status: Concluído  
-  - Descrição: Implementado em `routes/auth.py` com redirecionamento para `/user` ou `/admin`, e suporte a `return_url` para compras sem login.
+  - Descrição: Implementado em `routes/auth.py`, redireciona para `/user`, `/admin` ou `return_url` (ex.: `/user/buy/{product_id}`).
 
 - [x] **Registro de Usuários no Banco**  
   - Status: Concluído  
-  - Descrição: Usuários são criados em `users` após login OAuth2, corrigido em `routes/auth.py`.
+  - Descrição: Usuários criados em `users` após login OAuth2 em `routes/auth.py`.
 
 - [x] **Sessões com Redis**  
   - Status: Concluído  
-  - Descrição: Sessões armazenadas no Redis com TTL de 24 horas, funcionando em `get_current_user`.
+  - Descrição: Sessões armazenadas no Redis, validadas por `get_current_user`.
 
 #### 3. Produtos e Compras
 - [x] **Página Pública de Produtos (`/products`)**  
   - Status: Concluído  
-  - Descrição: Criada em `main.py` e `products.html`, acessível sem login, com botão "Comprar" redirecionando para login se necessário.
+  - Descrição: Rota em `main.py`, template `products.html`, acessível sem login, botão "Comprar" redireciona para login se necessário.
 
 - [x] **Gestão Básica de Produtos (Admin)**  
   - Status: Concluído  
-  - Descrição: Adição de produtos implementada em `routes/admin.py` com formulário em `admin.html`.
+  - Descrição: Adição de produtos em `routes/admin.py` com formulário em `admin.html`.
 
 - [ ] **Gestão Avançada de Produtos (Admin)**  
   - Status: Pendente  
-  - Descrição: Falta implementar edição e exclusão de produtos no dashboard admin.
+  - Descrição: Edição e exclusão de produtos ainda não implementadas.
 
 - [x] **Fluxo de Compra**  
   - Status: Concluído  
-  - Descrição: Compra em `/user/buy/{product_id}` funcionando, com redirecionamento para login OAuth2 se deslogado, QR Code e chave Pix validados.
+  - Descrição: Compra em `/user/buy/{product_id}`, redirecionamento para login se deslogado, QR Code e chave Pix gerados.
 
 - [x] **Gerador de Pix**  
   - Status: Concluído  
-  - Descrição: Implementado em `pix_generator.py`, usando `order_id` como `txid`, validado no banco.
+  - Descrição: `pix_generator.py` gera payloads válidos com `order_id` como `txid`.
 
 - [x] **Atualização de Estoque**  
   - Status: Concluído  
-  - Descrição: Produtos "individual" têm estoque atualizado para "sold" ao confirmar pedido em `routes/admin.py`.
+  - Descrição: Produtos "individual" têm estoque atualizado para "sold" em `routes/admin.py`.
 
 #### 4. Pedidos e Validação
 - [x] **Registro de Pedidos**  
   - Status: Concluído  
-  - Descrição: Pedidos criados em `orders` com `product_name`, funcionando em `routes/user.py`.
+  - Descrição: Pedidos salvos em `orders` com `product_name` em `routes/user.py`.
 
 - [x] **Dashboard do Usuário**  
   - Status: Concluído  
@@ -66,49 +66,74 @@
 
 - [x] **Dashboard do Admin (Pedidos)**  
   - Status: Concluído  
-  - Descrição: Lista pedidos pendentes e em verificação em `admin_orders.html`, com botões para confirmar/negar.
+  - Descrição: Lista pedidos pendentes e em verificação em `admin_orders.html`, com ações de confirmar/negar.
 
 - [x] **Validação Manual de Pedidos**  
   - Status: Concluído  
-  - Descrição: Implementada em `routes/admin.py` com `confirm-order` e `deny-order`, atualizando status e estoque.
+  - Descrição: Confirmação e negação em `routes/admin.py`, atualiza status e estoque.
 
 #### 5. Interface e Experiência do Usuário
 - [x] **Templates HTML com TailwindCSS**  
   - Status: Concluído  
-  - Descrição: `index.html`, `user.html`, `admin.html`, `products.html`, `buy.html`, e `admin_orders.html` criados com TailwindCSS via CDN.
+  - Descrição: Todos os templates (`index.html`, `user.html`, `admin.html`, `products.html`, `buy.html`, `admin_orders.html`, `admin_tickets.html`) usam TailwindCSS via CDN.
 
 - [x] **Timer na Página de Compra**  
   - Status: Concluído  
-  - Descrição: Timer de 10 minutos adicionado em `buy.html` com JavaScript.
+  - Descrição: Timer de 10 minutos em `buy.html` com JavaScript.
 
 - [x] **Favicon**  
   - Status: Concluído  
-  - Descrição: Adicionado em todos os templates com a URL fornecida.
+  - Descrição: Adicionado em todos os templates.
 
 #### 6. Notificações e Suporte
-- [ ] **Notificações por E-mail (SendGrid)**  
-  - Status: Pendente (Prototipado)  
-  - Descrição: Código prototipado em `routes/admin.py` para enviar e-mails ao confirmar/negar pedidos, mas ainda não testado ou integrado totalmente.
+- [x] **Notificações por E-mail (SendGrid) - Usuário**  
+  - Status: Concluído  
+  - Descrição: E-mails de confirmação e negação enviados ao usuário em `utils/email.py`, chamados em `routes/admin.py`.
 
-- [ ] **Sistema de Suporte (Tickets)**  
+- [x] **Notificações por E-mail (SendGrid) - Admin (Pedidos)**  
+  - Status: Concluído  
+  - Descrição: E-mail ao admin quando pedido muda para "em_verificacao" em `utils/email.py`, chamado em `routes/user.py`.
+
+- [ ] **Notificações por E-mail (SendGrid) - Tickets**  
   - Status: Pendente  
-  - Descrição: Botão "Abrir Ticket" existe em `user.html`, mas o sistema de tickets (criação, gestão) ainda não foi implementado.
+  - Descrição: Faltam e-mails específicos para novos tickets e respostas (ex.: `send_new_ticket_email`, `send_ticket_response_email`).
+
+- [x] **Sistema de Suporte (Tickets) - Básico**  
+  - Status: Concluído  
+  - Descrição: Criação de tickets em `routes/user.py`, listagem e resposta em `routes/admin.py`, com modelo `tickets.py` e templates `user.html` e `admin_tickets.html`.
+
+- [ ] **Sistema de Suporte (Tickets) - Completo**  
+  - Status: Pendente  
+  - Descrição: Faltam notificações por e-mail para tickets e exibição de respostas no dashboard do usuário.
 
 #### 7. Monitoramento e Escalabilidade
 - [ ] **Sentry para Monitoramento**  
   - Status: Pendente  
-  - Descrição: Configurado no `.env`, mas não integrado ao código para capturar erros.
+  - Descrição: Configurado no `.env`, mas não integrado ao código.
 
 - [ ] **Cache Avançado com Redis**  
   - Status: Pendente  
   - Descrição: Redis usado apenas para sessões; cache de produtos ou pedidos ainda não implementado.
 
+- [ ] **Validação Automática do Pix**  
+  - Status: Pendente (Opcional)  
+  - Descrição: Não implementada, validação permanece manual.
+
 ---
 
 ### Resumo
-**Concluído (17/23):**
-- Estrutura básica, autenticação OAuth2, registro de usuários, página pública de produtos, fluxo de compra com Pix, gestão básica de produtos, atualização de estoque, dashboards com pedidos, validação manual, templates com TailwindCSS, timer, favicon.
+**Concluído (20/26):**
+- Estrutura básica, autenticação OAuth2, registro de usuários, página pública de produtos, gestão básica de produtos, fluxo de compra com Pix, atualização de estoque, registro de pedidos, dashboards (usuário e admin), validação manual, templates com TailwindCSS, timer, favicon, notificações por e-mail para pedidos (usuário e admin), sistema básico de tickets.
 
-**Pendente (6/23):**
-- Gestão avançada de produtos (editar/excluir), notificações por e-mail (finalizar/testar), sistema de tickets, integração com Sentry, cache avançado com Redis, validação automática do Pix (opcional).
+**Pendente (6/26):**
+- Gestão avançada de produtos (editar/excluir), notificações completas para tickets, exibição de respostas de tickets no dashboard do usuário, integração com Sentry, cache avançado com Redis, validação automática do Pix (opcional).
 
+---
+
+### Comparação com o Último Checklist
+Desde o último checklist (17/23 concluídos):
+- **Novos Itens Concluídos:**
+  - Notificações por e-mail para admin (pedidos em verificação).
+  - Sistema básico de suporte (tickets) com criação, listagem e resposta.
+- **Ajustes:**
+  - Dividi o item "Sistema de Suporte (Tickets)" em "Básico" (concluído) e "Completo" (pendente) para refletir o progresso parcial.
